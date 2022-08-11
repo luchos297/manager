@@ -2,6 +2,8 @@ package com.astropay.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import com.astropay.dto.GuardarPostRequestDTO;
 import com.astropay.dto.ObtenerPostCommentResponseDTO;
 import com.astropay.dto.ObtenerPostResponseDTO;
@@ -20,7 +22,7 @@ public interface ManagerService {
 	 * @param size
 	 * @return List<PostResponseDTO>
 	 */
-	public List<ObtenerPostResponseDTO> obtenerListadoPost(int page, int size);
+	public List<ObtenerPostResponseDTO> obtenerListadoPost(Pageable pageable);
 	
 	/*
 	 * Retorna el listado de comentarios de un post paginado
@@ -29,7 +31,7 @@ public interface ManagerService {
 	 * @param size
 	 * @return List<PostCommentResponseDTO>
 	 */
-	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(String idPost, int page, int size);
+	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(String idPost, Pageable pageable);
 		
 	/*
 	 * Retorna el listado de post con el titulo ingresado

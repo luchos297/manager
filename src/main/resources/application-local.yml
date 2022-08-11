@@ -3,6 +3,7 @@ info:
   application:
     name: '@name@'
     description: '@description@'
+    version: '@version@'
 server:
   port: 8080
   error:
@@ -11,18 +12,12 @@ springdoc:
   swagger-ui:
     path: /manager/index.html
   api-docs:
-    path: /manager/v3/api-docs
+    path: /v3/api
 
 # Seguridad
 spring:
   application:
     name: '@name@'
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8083/auth/realms/baeldung
-          jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
 
 # Datasources
   datasource:

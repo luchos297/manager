@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -27,17 +29,18 @@ public class PostEntity implements Serializable {
 	private static final long serialVersionUID = 8846671641719923337L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", columnDefinition = "int")
-	private int id;
+	private Integer id;
 	
-	@Column(name = "userId", columnDefinition = "int")
-	private int userId;
+	@Column(name = "user_id", columnDefinition = "varchar", length = 20)
+	private Integer userId;
 
-	@Column(name = "title", columnDefinition = "varchar")
-	private Integer title;
+	@Column(name = "title", columnDefinition = "varchar", length = 100)
+	private String title;
 	
-	@Column(name = "body", columnDefinition = "varchar")
-	private Integer body;
+	@Column(name = "body", columnDefinition = "varchar", length = 255)
+	private String body;
 	
 	@Column(name = "created", columnDefinition = "datetime")
 	private LocalDateTime created;

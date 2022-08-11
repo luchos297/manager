@@ -20,14 +20,14 @@ import io.swagger.v3.oas.annotations.Operation;
  * @version 1.0.0
  * @since 14 jun. 2022
  */
-@FeignClient(name = "BlogClient", url = "https://jsonplaceholder.typicode.com/posts")
+@FeignClient(name = "BlogClient", url = "https://jsonplaceholder.typicode.com/")
 public interface BlogClient {
 	
-	@GetMapping(path = "manager")
+	@GetMapping(path = "posts")
 	@Operation(summary = API_OPERATION_NAME_OLP)
 	public ResponseEntity<List<ObtenerPostResponseDTO>> obtenerListadoPost();
 
-	@GetMapping(path = "manager/{idPost}/comments")
+	@GetMapping(path = "posts/{idPost}/comments")
 	@Operation(summary = API_OPERATION_NAME_OLCP)
 	public ResponseEntity<List<ObtenerPostCommentResponseDTO>> obtenerListadoComentarioPost(@PathVariable("idPost") String idPost);
 }

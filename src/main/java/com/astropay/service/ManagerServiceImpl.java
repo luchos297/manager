@@ -10,10 +10,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +23,6 @@ import com.astropay.dto.ObtenerPostResponseDTO;
 import com.astropay.entity.PostEntity;
 import com.astropay.exceptions.ManagerServiceException;
 import com.astropay.feign.BlogClient;
-import com.astropay.mapper.GuardarPostRequestMapper;
-import com.astropay.mapper.ObtenerPostMapper;
 import com.astropay.repository.PostRepository;
 
 /**
@@ -39,18 +37,15 @@ public class ManagerServiceImpl implements ManagerService {
 	private static Logger logger = Logger.getLogger(ManagerServiceImpl.class.getName());
 
 	@Autowired
+	private ModelMapper modelMapper;
+
+	@Autowired
 	private PostRepository postRepository;
-
-	@Autowired
-	private ObtenerPostMapper obtenerPostMapper;
-
-	@Autowired
-	private GuardarPostRequestMapper guardarPostRequestMapper;
 	
 	@Autowired
 	private BlogClient blogClient;
 
-	public List<ObtenerPostResponseDTO> obtenerListadoPost(int page, int size) {
+	public List<ObtenerPostResponseDTO> obtenerListadoPost(Pageable pageable) {
 		logger.log(Level.INFO, "SERVICE -> 'PostService.obtenerListadoPost()'");
 
 		ResponseEntity<List<ObtenerPostResponseDTO>> listPostResponseAPI = blogClient.obtenerListadoPost();
@@ -63,13 +58,16 @@ public class ManagerServiceImpl implements ManagerService {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_POST);
 		}
 		else {
-			Page<ObtenerPostResponseDTO> pages = new PageImpl<>(listPostResponseAPI.getBody(), PageRequest.of(page, size), listPostResponseAPI.getBody().size());
+			int start = pageable.getPageNumber() * pageable.getPageSize();
+		    int end = Math.min(start + pageable.getPageSize(), listPostResponseAPI.getBody().size());
 
-			return pages.getContent();
+		    List<ObtenerPostResponseDTO> subList = listPostResponseAPI.getBody().subList(start, end);
+
+		    return new PageImpl<ObtenerPostResponseDTO>(subList, pageable, subList.size()).getContent();
 		}
 	}
 	
-	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(String idPost, int page, int size) {
+	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(String idPost, Pageable pageable) {
 		logger.log(Level.INFO, "SERVICE -> 'PostService.obtenerListadoComentariosPost()'");
 
 		ResponseEntity<List<ObtenerPostCommentResponseDTO>> listComentariosPostResponseAPI = blogClient.obtenerListadoComentarioPost(idPost);
@@ -82,9 +80,12 @@ public class ManagerServiceImpl implements ManagerService {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_COMMENT_POST);
 		}
 		else {
-			Page<ObtenerPostCommentResponseDTO> pages = new PageImpl<>(listComentariosPostResponseAPI.getBody(), PageRequest.of(page, size), listComentariosPostResponseAPI.getBody().size());
+			int start = pageable.getPageNumber() * pageable.getPageSize();
+		    int end = Math.min(start + pageable.getPageSize(), listComentariosPostResponseAPI.getBody().size());
 
-			return pages.getContent();
+		    List<ObtenerPostCommentResponseDTO> subList = listComentariosPostResponseAPI.getBody().subList(start, end);
+
+		    return new PageImpl<ObtenerPostCommentResponseDTO>(subList, pageable, subList.size()).getContent();
 		}
 	}
 	
@@ -112,9 +113,9 @@ public class ManagerServiceImpl implements ManagerService {
 		if(Objects.isNull(guardarPostRequestDTO)) {
 			throw new ManagerServiceException(ERR_MANAGER_POST_CANNOT_BE_NULL);
 		}
-
-		PostEntity newEntity = postRepository.save(guardarPostRequestMapper.toEntity(guardarPostRequestDTO));
 		
-		return obtenerPostMapper.toDto(newEntity);
+		PostEntity newEntity = postRepository.save(modelMapper.map(guardarPostRequestDTO, PostEntity.class));
+		
+		return modelMapper.map(newEntity, ObtenerPostResponseDTO.class);
 	}
 }

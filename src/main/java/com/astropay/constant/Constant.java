@@ -76,15 +76,6 @@ public class Constant {
 			+ "<p> El cuerpo debe ser válido </p>";
 	public static final String API_RESPONSE_200_GP = "Post guardado con éxito";
 	
-	// Controller de Login
-	public static final String API_LOGIN_CONTROLLER = "Controlador de Login";
-	public static final String API_LOGIN_TAG = "login";
-
-	public static final String API_OPERATION_VALUE_LU = "Endpoint para loguear al usuario";
-	public static final String API_OPERATION_NOTES_LU = CONTROLLER_LABEL_DESCRIPCION + "<p> Este endpoint es utilizado para obtener el token de usuario </p>";
-	public static final String API_RESPONSE_200_LU = "Login obtenido con éxito";
-	
-	
 	// Interface Feign BlogClient
 	public static final String FEIGN_POSSIBLES_REQUESTS = "<h3> Solicitud: </h3> <p> El token y la URL deben ser válidos </p>";
 	public static final String API_OPERATION_NAME_OLP = "<h3> Descripción: </h3> <p> Este endpoint es utilizado para obtener el listado de posts en la API de Blog </p>"
@@ -97,13 +88,4 @@ public class Constant {
 	public static final String ERR_MANAGER_THERE_IS_NO_POST = "No hay posts para listar";
 	public static final String ERR_MANAGER_THERE_IS_NO_COMMENT_POST = "No hay comentarios del post para listar";
 	public static final String ERR_MANAGER_POST_CANNOT_BE_NULL = "El post no puede ser nulo";
-	
-	
-	
-	
-	public static final String ERR_ASISTENCIA_NO_TIENE_POLIZA_VIGENTE = "El asegurado no posee polizas vigente";
-	public static final String ERR_ASISTENCIA_NO_TIENE_SERVICIO_GRUA_VIGENTE = "El asegurado no posee servicio de grúa vigente";
-	public static final String ERR_ASISTENCIA_USUARIO_NO_EXISTE = "El usuario no existe";
-	public static final String ERR_ASISTENCIA_VEHICULO_NO_EXISTE = "El vehículo no existe";
-	public static final String ERR_ASISTENCIA_NO_POSIBLE_CREAR_ASISTENCIA_API_SOS = "No fue posible crear la solicitud de asistencia mecánica. Intente nuevamente más tarde";
 }
