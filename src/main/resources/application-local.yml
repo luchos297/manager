@@ -1,0 +1,44 @@
+# Configuracion general
+info:
+  application:
+    name: '@name@'
+    description: '@description@'
+server:
+  port: 8080
+  error:
+    include-message: always
+springdoc:
+  swagger-ui:
+    path: /manager/index.html
+  api-docs:
+    path: /manager/v3/api-docs
+
+# Seguridad
+spring:
+  application:
+    name: '@name@'
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8083/auth/realms/baeldung
+          jwk-set-uri: http://localhost:8083/auth/realms/baeldung/protocol/openid-connect/certs
+
+# Datasources
+  datasource:
+    url: jdbc:mariadb://localhost:3306/manager?autoReconnect=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+  sql:
+    init:
+      mode: always
+  jpa:
+    databasePlatform: org.hibernate.dialect.MariaDB103Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MariaDB103Dialect
