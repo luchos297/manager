@@ -31,7 +31,7 @@ public interface ManagerService {
 	 * @param size
 	 * @return List<PostCommentResponseDTO>
 	 */
-	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(String idPost, Pageable pageable);
+	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(Integer idPost, Pageable pageable);
 		
 	/*
 	 * Retorna el listado de post con el titulo ingresado

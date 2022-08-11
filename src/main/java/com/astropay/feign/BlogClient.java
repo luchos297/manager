@@ -29,5 +29,5 @@ public interface BlogClient {
 
 	@GetMapping(path = "posts/{idPost}/comments")
 	@Operation(summary = API_OPERATION_NAME_OLCP)
-	public ResponseEntity<List<ObtenerPostCommentResponseDTO>> obtenerListadoComentarioPost(@PathVariable("idPost") String idPost);
+	public ResponseEntity<List<ObtenerPostCommentResponseDTO>> obtenerListadoComentarioPost(@PathVariable("idPost") Integer idPost);
 }

@@ -67,7 +67,7 @@ public class ManagerServiceImpl implements ManagerService {
 		}
 	}
 	
-	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(String idPost, Pageable pageable) {
+	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(Integer idPost, Pageable pageable) {
 		logger.log(Level.INFO, "SERVICE -> 'PostService.obtenerListadoComentariosPost()'");
 
 		ResponseEntity<List<ObtenerPostCommentResponseDTO>> listComentariosPostResponseAPI = blogClient.obtenerListadoComentarioPost(idPost);
