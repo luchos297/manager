@@ -16,9 +16,10 @@ import com.astropay.dto.ObtenerPostResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 
 /**
- * @author buttazzo
+ * Interface de la API de Blog
+ * @author luchos297
  * @version 1.0.0
- * @since 14 jun. 2022
+ * @since 09 aug. 2022
  */
 @FeignClient(name = "BlogClient", url = "https://jsonplaceholder.typicode.com/")
 public interface BlogClient {

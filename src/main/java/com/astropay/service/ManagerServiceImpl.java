@@ -46,7 +46,7 @@ public class ManagerServiceImpl implements ManagerService {
 	private BlogClient blogClient;
 
 	public List<ObtenerPostResponseDTO> obtenerListadoPost(Pageable pageable) {
-		logger.log(Level.INFO, "SERVICE -> 'PostService.obtenerListadoPost()'");
+		logger.log(Level.INFO, "SERVICE -> 'ManagerService.obtenerListadoPost()'");
 
 		ResponseEntity<List<ObtenerPostResponseDTO>> listPostResponseAPI = blogClient.obtenerListadoPost();
 		
@@ -58,17 +58,18 @@ public class ManagerServiceImpl implements ManagerService {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_POST);
 		}
 		else {
+			List<ObtenerPostResponseDTO> list = listPostResponseAPI.getBody();
 			int start = pageable.getPageNumber() * pageable.getPageSize();
-		    int end = Math.min(start + pageable.getPageSize(), listPostResponseAPI.getBody().size());
+		    int end = Math.min(start + pageable.getPageSize(), list.size());
 
-		    List<ObtenerPostResponseDTO> subList = listPostResponseAPI.getBody().subList(start, end);
+		    List<ObtenerPostResponseDTO> subList = list.subList(start, end);
 
 		    return new PageImpl<ObtenerPostResponseDTO>(subList, pageable, subList.size()).getContent();
 		}
 	}
 	
 	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(Integer idPost, Pageable pageable) {
-		logger.log(Level.INFO, "SERVICE -> 'PostService.obtenerListadoComentariosPost()'");
+		logger.log(Level.INFO, "SERVICE -> 'ManagerService.obtenerListadoComentariosPost()'");
 
 		ResponseEntity<List<ObtenerPostCommentResponseDTO>> listComentariosPostResponseAPI = blogClient.obtenerListadoComentarioPost(idPost);
 		
@@ -80,17 +81,18 @@ public class ManagerServiceImpl implements ManagerService {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_COMMENT_POST);
 		}
 		else {
+			List<ObtenerPostCommentResponseDTO> list = listComentariosPostResponseAPI.getBody();
 			int start = pageable.getPageNumber() * pageable.getPageSize();
-		    int end = Math.min(start + pageable.getPageSize(), listComentariosPostResponseAPI.getBody().size());
+		    int end = Math.min(start + pageable.getPageSize(), list.size());
 
-		    List<ObtenerPostCommentResponseDTO> subList = listComentariosPostResponseAPI.getBody().subList(start, end);
+		    List<ObtenerPostCommentResponseDTO> subList = list.subList(start, end);
 
 		    return new PageImpl<ObtenerPostCommentResponseDTO>(subList, pageable, subList.size()).getContent();
 		}
 	}
 	
 	public List<ObtenerPostResponseDTO> obtenerListadoPostPorTitulo(String titulo) {
-		logger.log(Level.INFO, "SERVICE -> 'PostService.obtenerListadoPostPorTitulo()'");
+		logger.log(Level.INFO, "SERVICE -> 'ManagerService.obtenerListadoPostPorTitulo()'");
 
 		ResponseEntity<List<ObtenerPostResponseDTO>> listComentariosPostResponseAPI = blogClient.obtenerListadoPost();
 		
@@ -101,14 +103,15 @@ public class ManagerServiceImpl implements ManagerService {
 		if(Objects.isNull(listComentariosPostResponseAPI.getBody())) {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_COMMENT_POST);
 		}
-
-		List<ObtenerPostResponseDTO> listComentariosPostFiltradoResponseAPI = listComentariosPostResponseAPI.getBody().stream().filter(post -> post.getTitle().contains(titulo)).collect(Collectors.toList());
-	    
-		return listComentariosPostFiltradoResponseAPI;
+		else {
+			List<ObtenerPostResponseDTO> list = listComentariosPostResponseAPI.getBody();
+			
+			return list.stream().filter(post -> post.getTitle().contains(titulo)).collect(Collectors.toList());
+		}
 	}
 	
 	public ObtenerPostResponseDTO guardarPost(GuardarPostRequestDTO guardarPostRequestDTO) {
-		logger.log(Level.INFO, "SERVICE -> 'PostService.guardarPost()'");
+		logger.log(Level.INFO, "SERVICE -> 'ManagerService.guardarPost()'");
 
 		if(Objects.isNull(guardarPostRequestDTO)) {
 			throw new ManagerServiceException(ERR_MANAGER_POST_CANNOT_BE_NULL);

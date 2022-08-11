@@ -18,8 +18,7 @@ public interface ManagerService {
 	
 	/*
 	 * Retorna el listado de post paginado
-	 * @param page
-	 * @param size
+	 * @param Pageable
 	 * @return List<PostResponseDTO>
 	 */
 	public List<ObtenerPostResponseDTO> obtenerListadoPost(Pageable pageable);
@@ -27,8 +26,7 @@ public interface ManagerService {
 	/*
 	 * Retorna el listado de comentarios de un post paginado
 	 * @param idPost
-	 * @param page
-	 * @param size
+	 * @param Pageable
 	 * @return List<PostCommentResponseDTO>
 	 */
 	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(Integer idPost, Pageable pageable);

@@ -86,7 +86,7 @@ public class ManagerController {
 		@ApiResponse(description = API_RESPONSE_404, responseCode = RESPONSE_CODE_404, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),	
 	})
 	public ResponseEntity<List<ObtenerPostCommentResponseDTO>> obtenerListadoComentarioPost(@PathVariable("idPost") Integer idPost, Pageable pageable) {
-		logger.log(Level.INFO, "WEB -> 'ManagerController.obtenerListadoComentarioPost()'");
+		logger.log(Level.INFO, "CONTROLLER -> 'ManagerController.obtenerListadoComentarioPost()'");
 		
 		return ResponseEntity.ok(managerService.obtenerListadoComentariosPost(idPost, pageable));
 	}
@@ -99,7 +99,7 @@ public class ManagerController {
 		@ApiResponse(description = API_RESPONSE_404, responseCode = RESPONSE_CODE_404, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),	
 	})
 	public ResponseEntity<List<ObtenerPostResponseDTO>> obtenerListadoPostPorTitulo(@PathVariable("titulo") String titulo) {
-		logger.log(Level.INFO, "WEB -> 'ManagerController.obtenerListadoPostPorTitulo()'");
+		logger.log(Level.INFO, "CONTROLLER -> 'ManagerController.obtenerListadoPostPorTitulo()'");
 		
 		return ResponseEntity.ok(managerService.obtenerListadoPostPorTitulo(titulo));
 	}
@@ -112,7 +112,7 @@ public class ManagerController {
 		@ApiResponse(description = API_RESPONSE_404, responseCode = RESPONSE_CODE_404, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),	
 	})
 	public ResponseEntity<ObtenerPostResponseDTO> guardarPost(@RequestBody @Valid GuardarPostRequestDTO guardarPostRequestDTO) {
-		logger.log(Level.INFO, "WEB -> 'AsistenciaController.crearAsistencia()'");
+		logger.log(Level.INFO, "CONTROLLER -> 'ManagerController.guardarPost()'");
 		
 		return ResponseEntity.ok(managerService.guardarPost(guardarPostRequestDTO));
 	}

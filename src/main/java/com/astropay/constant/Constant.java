@@ -10,34 +10,8 @@ public class Constant {
 	
 	private Constant() {}
 	
-	// Auth
-	public static final String CREDENCIALES_INVALIDAS = "Credenciales inválidas";
-	public static final String MSG_ERROR = "{\"error\": \"Credenciales inválidas\"} ";
-	public static final String TYPE_JSON = "application/json; charset=utf-8";
 	public static final String APPLICATION_JSON = "application/json";
-	public static final String AUTHORIZATION = "Authorization";
-	public static final String AUTHORIZATION_TYPE = "bearer-key";
-	public static final String BEARER = "Bearer";
-	public static final String HEADER = "header";
-	public static final String USUARIO = "USUARIO";
-	public static final String USER = "USER";
-	public static final String OPTIONS = "OPTIONS";
-	public static final String TOKEN = "token";
-	public static final String URL_LOWER = "url";
-	public static final String BASIC = "Basic ";
-	public static final String DO_FILTER = "doFilter";
-	public static final String OBTENER_USER_METHOD = "getUsuario";
-	public static final String OBTENER_ENCABEZADO = "Obtener encabezado - HEADER: ";
-	public static final String OBTENER_USER = "Obtener usuario - USER: ";
-	public static final String USUARIO_ESTADO_ACTIVO = "ACTIVO";
-	public static final String CONTENT_LENGTH = "Content-Length";
-	public static final String DEFAULT_COLOR = "blanco";
 	
-	// Configuration
-	public static final String API_NAME = "API Manager";
-	public static final String API_DESCRIPTION = "Basic CRUD of posts";
-	public static final String API_MANAGER_TAG_DESCRIPCION = "Listado de endpoints de administrador";
-
 	// Controller
 	public static final String CONTROLLER_LABEL_DESCRIPCION = "<h3> Descripción: </h3>";
 	public static final String CONTROLLER_LABEL_REQUISITOS = "<h3> Requisitos: </h3>";
