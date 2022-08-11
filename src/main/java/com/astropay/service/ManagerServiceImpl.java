@@ -102,7 +102,7 @@ public class ManagerServiceImpl implements ManagerService {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_COMMENT_POST);
 		}
 
-		List<ObtenerPostResponseDTO> listComentariosPostFiltradoResponseAPI = listComentariosPostResponseAPI.getBody().stream().filter(post -> post.getTitle().startsWith(titulo)).collect(Collectors.toList());
+		List<ObtenerPostResponseDTO> listComentariosPostFiltradoResponseAPI = listComentariosPostResponseAPI.getBody().stream().filter(post -> post.getTitle().contains(titulo)).collect(Collectors.toList());
 	    
 		return listComentariosPostFiltradoResponseAPI;
 	}
