@@ -5,14 +5,17 @@ import static com.astropay.constant.Constant.API_OPERATION_NOTES_GP;
 import static com.astropay.constant.Constant.API_OPERATION_NOTES_OLCP;
 import static com.astropay.constant.Constant.API_OPERATION_NOTES_OLP;
 import static com.astropay.constant.Constant.API_OPERATION_NOTES_OLPT;
+import static com.astropay.constant.Constant.API_OPERATION_NOTES_OP;
 import static com.astropay.constant.Constant.API_OPERATION_VALUE_GP;
 import static com.astropay.constant.Constant.API_OPERATION_VALUE_OLCP;
 import static com.astropay.constant.Constant.API_OPERATION_VALUE_OLP;
 import static com.astropay.constant.Constant.API_OPERATION_VALUE_OLPT;
+import static com.astropay.constant.Constant.API_OPERATION_VALUE_OP;
 import static com.astropay.constant.Constant.API_RESPONSE_200_GP;
 import static com.astropay.constant.Constant.API_RESPONSE_200_OLCP;
 import static com.astropay.constant.Constant.API_RESPONSE_200_OLP;
 import static com.astropay.constant.Constant.API_RESPONSE_200_OLPT;
+import static com.astropay.constant.Constant.API_RESPONSE_200_OP;
 import static com.astropay.constant.Constant.API_RESPONSE_400;
 import static com.astropay.constant.Constant.API_RESPONSE_404;
 import static com.astropay.constant.Constant.APPLICATION_JSON;
@@ -25,8 +28,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +35,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.astropay.dto.GuardarPostRequestDTO;
-import com.astropay.dto.ObtenerPostCommentResponseDTO;
+import com.astropay.dto.ObtenerCommentarioPostResponseDTO;
 import com.astropay.dto.ObtenerPostResponseDTO;
 import com.astropay.service.ManagerService;
 
@@ -72,23 +71,36 @@ public class ManagerController {
 		@ApiResponse(description = API_RESPONSE_400, responseCode = RESPONSE_CODE_400, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),
 		@ApiResponse(description = API_RESPONSE_404, responseCode = RESPONSE_CODE_404, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),	
 	})
-	public ResponseEntity<List<ObtenerPostResponseDTO>> obtenerListadoPosts(Pageable pageable) {
+	public ResponseEntity<List<ObtenerPostResponseDTO>> obtenerListadoPost(Pageable pageable) {
 		logger.log(Level.INFO, "CONTROLLER -> 'ManagerController.obtenerListadoPosts()'");
 		
 		return ResponseEntity.ok(managerService.obtenerListadoPost(pageable));
 	}
 	
 	@GetMapping("/{idPost}")
+	@Operation(summary = API_OPERATION_VALUE_OP, description = API_OPERATION_NOTES_OP, tags = {API_MANAGER_TAG})
+	@ApiResponses(value = {
+		@ApiResponse(description = API_RESPONSE_200_OP, responseCode = RESPONSE_CODE_200, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),
+		@ApiResponse(description = API_RESPONSE_400, responseCode = RESPONSE_CODE_400, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),
+		@ApiResponse(description = API_RESPONSE_404, responseCode = RESPONSE_CODE_404, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),	
+	})
+	public ResponseEntity<ObtenerPostResponseDTO> obtenerPost(@PathVariable("idPost") Integer idPost) {
+		logger.log(Level.INFO, "CONTROLLER -> 'ManagerController.obtenerPost()'");
+		
+		return ResponseEntity.ok(managerService.obtenerPost(idPost));
+	}
+	
+	@GetMapping("/comentarios/{idPost}")
 	@Operation(summary = API_OPERATION_VALUE_OLCP, description = API_OPERATION_NOTES_OLCP, tags = {API_MANAGER_TAG})
 	@ApiResponses(value = {
 		@ApiResponse(description = API_RESPONSE_200_OLCP, responseCode = RESPONSE_CODE_200, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),
 		@ApiResponse(description = API_RESPONSE_400, responseCode = RESPONSE_CODE_400, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),
 		@ApiResponse(description = API_RESPONSE_404, responseCode = RESPONSE_CODE_404, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),	
 	})
-	public ResponseEntity<List<ObtenerPostCommentResponseDTO>> obtenerListadoComentarioPost(@PathVariable("idPost") Integer idPost, Pageable pageable) {
+	public ResponseEntity<List<ObtenerCommentarioPostResponseDTO>> obtenerListadoComentarioPost(@PathVariable("idPost") Integer idPost) {
 		logger.log(Level.INFO, "CONTROLLER -> 'ManagerController.obtenerListadoComentarioPost()'");
 		
-		return ResponseEntity.ok(managerService.obtenerListadoComentariosPost(idPost, pageable));
+		return ResponseEntity.ok(managerService.obtenerListadoComentariosPost(idPost));
 	}
 	
 	@GetMapping("titulo/{titulo}")
@@ -104,16 +116,16 @@ public class ManagerController {
 		return ResponseEntity.ok(managerService.obtenerListadoPostPorTitulo(titulo));
 	}
 	
-	@PostMapping
+	@PostMapping("/{idPost}")
 	@Operation(summary = API_OPERATION_VALUE_GP, description = API_OPERATION_NOTES_GP, tags = {API_MANAGER_TAG})
 	@ApiResponses(value = {
 		@ApiResponse(description = API_RESPONSE_200_GP, responseCode = RESPONSE_CODE_200, content = {	@Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),
 		@ApiResponse(description = API_RESPONSE_400, responseCode = RESPONSE_CODE_400, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),
 		@ApiResponse(description = API_RESPONSE_404, responseCode = RESPONSE_CODE_404, content = { @Content(mediaType = APPLICATION_JSON, schema = @Schema(implementation = ResponseEntity.class))}),	
 	})
-	public ResponseEntity<ObtenerPostResponseDTO> guardarPost(@RequestBody @Valid GuardarPostRequestDTO guardarPostRequestDTO) {
+	public ResponseEntity<ObtenerPostResponseDTO> guardarPost(@PathVariable("idPost") Integer idPost) {
 		logger.log(Level.INFO, "CONTROLLER -> 'ManagerController.guardarPost()'");
 		
-		return ResponseEntity.ok(managerService.guardarPost(guardarPostRequestDTO));
+		return ResponseEntity.ok(managerService.guardarPost(idPost));
 	}
 }

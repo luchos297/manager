@@ -1,5 +1,7 @@
 package com.astropay.dto;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +25,7 @@ public class ObtenerPostResponseDTO {
 	
 	@Schema(description = "ID del post")
 	@JsonProperty("id")
-	private Integer id;
+	private Integer codigo;
 	
 	@Schema(description = "Título del post")
 	@JsonProperty("title")
@@ -32,4 +34,7 @@ public class ObtenerPostResponseDTO {
 	@Schema(description = "Cuerpo del post")
 	@JsonProperty("body")
 	private String body;
+	
+	@Schema(description = "Comentarios del post")
+	private List<ObtenerCommentarioPostResponseDTO> comentario;
 }

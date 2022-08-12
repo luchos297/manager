@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import com.astropay.dto.GuardarPostRequestDTO;
-import com.astropay.dto.ObtenerPostCommentResponseDTO;
+import com.astropay.dto.ObtenerCommentarioPostResponseDTO;
 import com.astropay.dto.ObtenerPostResponseDTO;
 
 /**
@@ -24,12 +23,18 @@ public interface ManagerService {
 	public List<ObtenerPostResponseDTO> obtenerListadoPost(Pageable pageable);
 	
 	/*
-	 * Retorna el listado de comentarios de un post paginado
+	 * Retorna el detalle de un post
 	 * @param idPost
-	 * @param Pageable
+	 * @return List<ObtenerPostResponseDTO>
+	 */
+	public ObtenerPostResponseDTO obtenerPost(Integer idPost);
+	
+	/*
+	 * Retorna el listado de comentarios de un post
+	 * @param idPost
 	 * @return List<PostCommentResponseDTO>
 	 */
-	public List<ObtenerPostCommentResponseDTO> obtenerListadoComentariosPost(Integer idPost, Pageable pageable);
+	public List<ObtenerCommentarioPostResponseDTO> obtenerListadoComentariosPost(Integer idPost);
 		
 	/*
 	 * Retorna el listado de post con el titulo ingresado
@@ -39,9 +44,9 @@ public interface ManagerService {
 	public List<ObtenerPostResponseDTO> obtenerListadoPostPorTitulo(String titulo);
 		
 	/*
-	 * Guarda un nuevo post en la BD
-	 * @param guardarPostRequestDTO
+	 * Guarda en la BD un post con sus comentarios desde la API de Blog
+	 * @param idPost
 	 * @return PostResponseDTO
 	 */
-	public ObtenerPostResponseDTO guardarPost(GuardarPostRequestDTO guardarPostRequestDTO);
+	public ObtenerPostResponseDTO guardarPost(Integer idPost);
 }

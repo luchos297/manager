@@ -18,15 +18,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter
-public class ObtenerPostCommentResponseDTO {
+public class ObtenerCommentarioPostResponseDTO {
 	
 	@Schema(description = "ID del post")
 	@JsonProperty("postId")
-	private Integer postId;
+	private Integer id;
 
 	@Schema(description = "ID del comentario")
 	@JsonProperty("id")
-	private Integer id;
+	private Integer codigo;
 
 	@Schema(description = "Nombre del autor")
 	@JsonProperty("name")
@@ -38,5 +38,5 @@ public class ObtenerPostCommentResponseDTO {
 	
 	@Schema(description = "Cuerpo del post")
 	@JsonProperty("body")
-	private String body;	
+	private String body;
 }

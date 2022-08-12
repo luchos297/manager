@@ -30,6 +30,10 @@ public class Constant {
 	public static final String API_OPERATION_NOTES_OLP = CONTROLLER_LABEL_DESCRIPCION + "<p> Este endpoint es utilizado para obtener el listado de posts paginados desde la API de Blog </p>";
 	public static final String API_RESPONSE_200_OLP = "Listado de post obtenido con éxito";
 	
+	public static final String API_OPERATION_VALUE_OP = "Endpoint para obtener el detalle de un post";
+	public static final String API_OPERATION_NOTES_OP = CONTROLLER_LABEL_DESCRIPCION + "<p> Este endpoint es utilizado para obtener el detalle del post desde la API de Blog </p>";
+	public static final String API_RESPONSE_200_OP = "Post obtenido con éxito";
+	
 	public static final String API_OPERATION_VALUE_OLCP = "Endpoint para obtener el listado de comentarios de un post";
 	public static final String API_OPERATION_NOTES_OLCP = CONTROLLER_LABEL_DESCRIPCION + "<p> Este endpoint es utilizado para obtener el listado de comentarios de un post desde la API de Blog </p>"
 			+ CONTROLLER_LABEL_REQUISITOS
@@ -54,12 +58,16 @@ public class Constant {
 	public static final String FEIGN_POSSIBLES_REQUESTS = "<h3> Solicitud: </h3> <p> El token y la URL deben ser válidos </p>";
 	public static final String API_OPERATION_NAME_OLP = "<h3> Descripción: </h3> <p> Este endpoint es utilizado para obtener el listado de posts en la API de Blog </p>"
 		+ FEIGN_POSSIBLES_REQUESTS + "<h3> Response: </h3> <p> Code 200: OK (PostResponseAPI) </p> <p> Code 404: NOT FOUND </p>";
-
+	
+	public static final String API_OPERATION_NAME_OP = "<h3> Descripción: </h3> <p> Este endpoint es utilizado para obtener un post por ID en la API de Blog </p>"
+			+ FEIGN_POSSIBLES_REQUESTS + "<h3> Response: </h3> <p> Code 200: OK (PostResponseAPI) </p> <p> Code 404: NOT FOUND </p>";
+	
 	public static final String API_OPERATION_NAME_OLCP = "<h3> Descripción: </h3> <p> Este endpoint es utilizado para obtener el listado de comentarios de un post en la API de Blog </p>"
 		+ FEIGN_POSSIBLES_REQUESTS + "<h3> Response: </h3> <p> Code 200: OK (PostCommentResponseAPI) </p> <p> Code 404: NOT FOUND </p>";
 
 	// Errores
-	public static final String ERR_MANAGER_THERE_IS_NO_POST = "No hay posts para listar";
+	public static final String ERR_MANAGER_THERE_IS_NO_LIST_POST = "No hay posts para listar";
+	public static final String ERR_MANAGER_THERE_IS_NO_POST = "El post no existe";
 	public static final String ERR_MANAGER_THERE_IS_NO_COMMENT_POST = "No hay comentarios del post para listar";
-	public static final String ERR_MANAGER_POST_CANNOT_BE_NULL = "El post no puede ser nulo";
+	public static final String ERR_MANAGER_POST_ID_CANNOT_BE_NULL = "El post no puede ser nulo";
 }
