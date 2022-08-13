@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * DTO de Comentario
  * @author luchos297
  * @version 1.0.0
  * @since 09 aug. 2022

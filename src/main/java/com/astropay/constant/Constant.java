@@ -70,4 +70,9 @@ public class Constant {
 	public static final String ERR_MANAGER_THERE_IS_NO_POST = "El post no existe";
 	public static final String ERR_MANAGER_THERE_IS_NO_COMMENT_POST = "No hay comentarios del post para listar";
 	public static final String ERR_MANAGER_POST_ID_CANNOT_BE_NULL = "El post no puede ser nulo";
+	
+	public static final String ERR_FEIGN_400 = "Hubo un error al procesar la solicitud ";
+	public static final String ERR_FEIGN_404 = "La solicitud no existe";
+	public static final String ERR_FEIGN_500 = "Ha ocurrido un error. Intente mñas tarde";
+	
 }

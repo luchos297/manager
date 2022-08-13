@@ -86,9 +86,8 @@ public class ManagerServiceImpl implements ManagerService {
 		if(Objects.isNull(postResponseAPI.getBody())) {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_POST);
 		}
-		else {
-		    return postResponseAPI.getBody();
-		}
+		
+		return postResponseAPI.getBody();
 	}
 	
 	public List<ObtenerCommentarioPostResponseDTO> obtenerListadoComentariosPost(Integer idPost) {
@@ -103,9 +102,11 @@ public class ManagerServiceImpl implements ManagerService {
 		if(Objects.isNull(listComentariosPostResponseAPI.getBody())) {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_COMMENT_POST);
 		}
-		else {
-			return listComentariosPostResponseAPI.getBody();
+		if(listComentariosPostResponseAPI.getBody().isEmpty()) {
+			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_COMMENT_POST);
 		}
+
+		return listComentariosPostResponseAPI.getBody();
 	}
 	
 	public List<ObtenerPostResponseDTO> obtenerListadoPostPorTitulo(String titulo) {
@@ -120,11 +121,10 @@ public class ManagerServiceImpl implements ManagerService {
 		if(Objects.isNull(listComentariosPostResponseAPI.getBody())) {
 			throw new ManagerServiceException(ERR_MANAGER_THERE_IS_NO_COMMENT_POST);
 		}
-		else {
-			List<ObtenerPostResponseDTO> list = listComentariosPostResponseAPI.getBody();
+		
+		List<ObtenerPostResponseDTO> list = listComentariosPostResponseAPI.getBody();
 			
-			return list.stream().filter(post -> post.getTitle().contains(titulo)).collect(Collectors.toList());
-		}
+		return list.stream().filter(post -> post.getTitle().contains(titulo)).collect(Collectors.toList());
 	}
 	
 	public ObtenerPostResponseDTO guardarPost(Integer idPost) {

@@ -1,7 +1,5 @@
 package com.astropay.dto;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -10,7 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author buttazzo
+ * DTO de Post
+ * @author luchos297
  * @version 1.0.0
  * @since 09 aug. 2022
  */
@@ -34,7 +33,4 @@ public class ObtenerPostResponseDTO {
 	@Schema(description = "Cuerpo del post")
 	@JsonProperty("body")
 	private String body;
-	
-	@Schema(description = "Comentarios del post")
-	private List<ObtenerCommentarioPostResponseDTO> comentario;
 }

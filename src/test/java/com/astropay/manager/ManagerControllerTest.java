@@ -33,9 +33,9 @@ public class ManagerControllerTest {
 	@Test
 	public void obtenerListadoPost() throws Exception {
 		List<ObtenerPostResponseDTO> listPostDTO = List.of(
-				new ObtenerPostResponseDTO(1, 1, "sunt aut facere repellat provident occaecati excepturi optio reprehenderit", "quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto", null), 
-				new ObtenerPostResponseDTO(1, 2, "qui est esse", "est rerum tempore vitae\\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\\nqui aperiam non debitis possimus qui neque nisi nulla", null), 
-				new ObtenerPostResponseDTO(1, 3, "ea molestias quasi exercitationem repellat qui ipsa sit aut", "et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut", null)
+				new ObtenerPostResponseDTO(1, 1, "sunt aut facere repellat provident occaecati excepturi optio reprehenderit", "quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto"), 
+				new ObtenerPostResponseDTO(1, 2, "qui est esse", "est rerum tempore vitae\\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\\nqui aperiam non debitis possimus qui neque nisi nulla"), 
+				new ObtenerPostResponseDTO(1, 3, "ea molestias quasi exercitationem repellat qui ipsa sit aut", "et iusto sed quo iure\\nvoluptatem occaecati omnis eligendi aut ad\\nvoluptatem doloribus vel accusantium quis pariatur\\nmolestiae porro eius odio et labore et velit aut")
 				);
 
 		when(managerService.obtenerListadoPost(PageRequest.of(0, 3))).thenReturn(listPostDTO);
@@ -44,10 +44,10 @@ public class ManagerControllerTest {
 	
 	@Test
 	public void obtenerPost() throws Exception {
-		ObtenerPostResponseDTO postDTO = new ObtenerPostResponseDTO(1, 1, "sunt aut facere repellat provident occaecati excepturi optio reprehenderit", "quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto", null); 
+		ObtenerPostResponseDTO postDTO = new ObtenerPostResponseDTO(1, 1, "sunt aut facere repellat provident occaecati excepturi optio reprehenderit", "quia et suscipit\\nsuscipit recusandae consequuntur expedita et cum\\nreprehenderit molestiae ut ut quas totam\\nnostrum rerum est autem sunt rem eveniet architecto"); 
 
 		when(managerService.obtenerPost(1)).thenReturn(postDTO);
-		mockMvc.perform(get("/manager")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
+		mockMvc.perform(get("/manager/1")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 	
 	@Test
@@ -61,34 +61,26 @@ public class ManagerControllerTest {
 				);
 
 		when(managerService.obtenerListadoComentariosPost(39)).thenReturn(listCommentPostDTO);
-		mockMvc.perform(get("/manager/{idPost}")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
+		mockMvc.perform(get("/manager/comentarios/39")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 	
 	@Test
 	public void obtenerListadoPostPorTitulo() throws Exception {
 		List<ObtenerPostResponseDTO> listCommentPostPorTituloDTO = List.of(
-				new ObtenerPostResponseDTO(5, 43, "eligendi iste nostrum consequuntur adipisci praesentium sit beatae perferendis", "similique fugit est\nillum et dolorum harum et voluptate eaque quidem\nexercitationem quos nam commodi possimus cum odio nihil nulla\ndolorum exercitationem magnam ex et a et distinctio debitis", null), 
-				new ObtenerPostResponseDTO(6, 52, "qui enim et consequuntur quia animi quis voluptate quibusdam", "iusto est quibusdam fuga quas quaerat molestias\na enim ut sit accusamus enim\ntemporibus iusto accusantium provident architecto\nsoluta esse reprehenderit qui laborum", null), 
-				new ObtenerPostResponseDTO(8, 73, "consequuntur deleniti eos quia temporibus ab aliquid at", "voluptatem cumque tenetur consequatur expedita ipsum nemo quia explicabo\naut eum minima consequatur\ntempore cumque quae est et\net in consequuntur voluptatem voluptates aut", null)
+				new ObtenerPostResponseDTO(5, 43, "eligendi iste nostrum consequuntur adipisci praesentium sit beatae perferendis", "similique fugit est\nillum et dolorum harum et voluptate eaque quidem\nexercitationem quos nam commodi possimus cum odio nihil nulla\ndolorum exercitationem magnam ex et a et distinctio debitis"), 
+				new ObtenerPostResponseDTO(6, 52, "qui enim et consequuntur quia animi quis voluptate quibusdam", "iusto est quibusdam fuga quas quaerat molestias\na enim ut sit accusamus enim\ntemporibus iusto accusantium provident architecto\nsoluta esse reprehenderit qui laborum"), 
+				new ObtenerPostResponseDTO(8, 73, "consequuntur deleniti eos quia temporibus ab aliquid at", "voluptatem cumque tenetur consequatur expedita ipsum nemo quia explicabo\naut eum minima consequatur\ntempore cumque quae est et\net in consequuntur voluptatem voluptates aut")
 				);
 
 		when(managerService.obtenerListadoPostPorTitulo("consequuntur")).thenReturn(listCommentPostPorTituloDTO);
-		mockMvc.perform(get("/manager/titulo/{titulo}")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
+		mockMvc.perform(get("/manager/titulo/consequuntur")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 	
 	@Test
 	public void guardarPost() throws Exception {
-		List<ObtenerCommentarioPostResponseDTO> listCommentPostDTO = List.of(
-				new ObtenerCommentarioPostResponseDTO(1, 1, "id labore ex et quam laborum", "Eliseo@gardner.biz", "laudantium enim quasi est quidem magnam voluptate ipsam eos\\ntempora quo necessitatibus\\ndolor quam autem quasi\\nreiciendis et nam sapiente accusantium"), 
-				new ObtenerCommentarioPostResponseDTO(1, 2, "quo vero reiciendis velit similique earum", "Janick@marty.me", "est natus enim nihil est dolore omnis voluptatem numquam\\net omnis occaecati quod ullam at\\nvoluptatem error expedita pariatur\\nnihil sint nostrum voluptatem reiciendis et"), 
-				new ObtenerCommentarioPostResponseDTO(1, 3, "odio adipisci rerum aut animi", "Nikita@garfield.biz", "quia molestiae reprehenderit quasi aspernatur\\naut expedita occaecati aliquam eveniet laudantium\\nomnis quibusdam delectus saepe quia accusamus maiores nam est\\ncum et ducimus et vero voluptates excepturi deleniti ratione"),
-				new ObtenerCommentarioPostResponseDTO(1, 4, "alias odio sit", "Lew@alysha.tv", "non et atque\\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\\nquia voluptas consequuntur itaque dolor\\net qui rerum deleniti ut occaecati"), 
-				new ObtenerCommentarioPostResponseDTO(1, 5, "vero eaque aliquid doloribus et culpa", "Hayden@althea.biz", "harum non quasi et ratione\\ntempore iure ex voluptates in ratione\\nharum architecto fugit inventore cupiditate\\nvoluptates magni quo et")
-				);
+		ObtenerPostResponseDTO obtenerPostResponseDTO = new ObtenerPostResponseDTO(3, 24, "autem hic labore sunt dolores incidunt", "enim et ex nulla\\nomnis voluptas quia qui\\nvoluptatem consequatur numquam aliquam sunt\\ntotam recusandae id dignissimos aut sed asperiores deserunt");
 		
-		ObtenerPostResponseDTO obtenerPostResponseDTO = new ObtenerPostResponseDTO(73, 49, "Luz: a la espera de la segmentación", "El Gobierno de Mendoza inició el proceso de revisión tarifaria para aplicar aumentos en el Valor Agregado de Distribución.", listCommentPostDTO);
-		
-		when(managerService.guardarPost(1)).thenReturn(obtenerPostResponseDTO);
-		mockMvc.perform(post("/manager")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
+		when(managerService.guardarPost(24)).thenReturn(obtenerPostResponseDTO);
+		mockMvc.perform(post("/manager/24")).andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON));
 	}
 }
